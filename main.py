@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 """
@@ -44,7 +44,10 @@ def main():
     )
     args = parser.parse_args()
 
-    gol_world = world.load_world(args.worldfile)
+    if args.worldfile[-3:].upper() == "RLE":
+        gol_world = world.load_world_from_rle(args.worldfile)
+    else:
+        gol_world = world.load_world(args.worldfile)
     while True:
         gol_world = gol.simulate(gol_world, 1)
         print(world.render_world(gol_world, alive=args.alive, dead=args.dead))

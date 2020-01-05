@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 """
 Tests for all functions in "gol" and "world" modules
 """
@@ -9,6 +6,7 @@ import gol
 import world
 
 EXAMPLE_FILE = "./examples/glider.txt"
+EXAMPLE_RLE_FILE = "./examples/glider.rle"
 
 def test_load_world():
     """Tests world.load_world()"""
@@ -18,6 +16,12 @@ def test_load_world():
 
     gol_world = world.load_world(EXAMPLE_FILE, alive="O")
     assert gol_world == set()
+
+def test_load_world_from_rle():
+    """Tests world.test_load_world_from_rle()"""
+    gol_world = world.load_world_from_rle(EXAMPLE_RLE_FILE)
+    assert len(gol_world) == 5
+    assert gol_world == set([(1, 0), (2, 1), (0, 2), (1, 2), (2, 2)])
 
 def test_render_world():
     """Tests world.render_world()"""
